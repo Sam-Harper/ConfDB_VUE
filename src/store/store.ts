@@ -37,6 +37,7 @@ const state: MainVuexState = {
   snackBarOpen: false,
   snackBarText: '',
   snackBarColor: '',
+  token: ''
 }
 
 export default new Vuex.Store({
@@ -46,7 +47,7 @@ export default new Vuex.Store({
     module,
     pset,
   },
-  state,
+  state,	
   mutations: {
     SET_SELECTED_NODE_VIA_ID(state, payload) {
       //console.log('SELECTED NODE ID: ' + payload.selectedNodeId)
@@ -176,6 +177,9 @@ export default new Vuex.Store({
     SET_DARK_MODE(state, payload) {
       state.darkMode = payload
     },
+    SET_TOKEN(state, payload) {
+      state.token = payload
+    },
     SET_SNACKBAR_TEXT(state, payload) {
       state.snackBarOpen = true
       console.log('SNACKBAR COLOR: ' + payload.snackBarColor)
@@ -218,6 +222,9 @@ export default new Vuex.Store({
     },
     setDarkMode({ commit }, payload) {
       commit('SET_DARK_MODE', payload)
+    },
+    setToken({ commit }, payload) {
+      commit('SET_TOKEN', payload)
     },
     setSnackBarText({ commit }, payload) {
       commit('SET_SNACKBAR_TEXT', payload)
@@ -282,6 +289,9 @@ export default new Vuex.Store({
     getSnackBarColor(state) {
       //console.log('SNACKBAR COLOR: ' + state.snackBarColor)
       return state.snackBarColor
+    },
+    getToken(state) {
+      return state.token
     },
   },
 })

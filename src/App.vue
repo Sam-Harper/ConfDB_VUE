@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app>   
     <v-container>
       <v-toolbar :dark="getDarkMode">
         <v-app-bar-nav-icon> </v-app-bar-nav-icon>
@@ -54,8 +54,9 @@
       </v-row>
       <v-btn small @click="testFunctionMA()">Test function main APP</v-btn>
       <NotificationSnackBar />
+      
     </v-container>
-  </v-app>
+  </v-app> 
 </template>
 
 <script lang="ts">
@@ -63,8 +64,8 @@ import TreeView from './components/TreeView.vue'
 import TableView from './components/TableView.vue'
 import SnippetView from './components/SnippetView.vue'
 import NotificationSnackBar from './components/NotificationSnackBar.vue'
-
-import { Component, Vue } from 'vue-property-decorator'
+import FileUploadService from '@/services/FileUploadService.js'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import { mapGetters } from 'vuex'
 
 @Component({
@@ -77,10 +78,11 @@ import { mapGetters } from 'vuex'
     TreeView,
     TableView,
     SnippetView,
-    NotificationSnackBar,
+    NotificationSnackBar,  
   },
 })
 export default class App extends Vue {
+  @Prop(Object) readonly keycloak: Record<string, any> | undefined	
   private name: any = 'App'
   private file: any = null
   private fileContent: any = null
@@ -91,18 +93,9 @@ export default class App extends Vue {
 
   public onUpload() {
     //console.log(this.file)
-
-    var reader = new FileReader()
-
-    // Use the javascript reader object to load the contents
-    // of the file in the v-model prop
-    reader.readAsText(this.file)
-    reader.onload = () => {
-      this.fileContent = reader.result
-      //console.log(this.fileContent)
-
-      this.$store.dispatch('setOpenFileContent', this.fileContent)
-    }
+//   console.log('HOME RECEIVED KEYTOKEN: ' + JSON.stringify(this.$store.getters.getToken));
+     console.log('HOME RECEIVED KEYTOKEN: ' + JSON.stringify(this.keycloak));
+    FileUploadService.uploadFile(this.file,this.keycloak.idToken) 
   }
 
   public switchDarkMode() {

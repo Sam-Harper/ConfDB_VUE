@@ -15,6 +15,7 @@ export interface MainVuexState {
   snackBarOpen: boolean
   snackBarText: string
   snackBarColor: string
+  token : string
 }
 //TODO
 export interface NodeObject {}
