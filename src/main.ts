@@ -6,7 +6,7 @@ import KeyCloaker from './lib/KeyCloaker'
 
 Vue.config.productionTip = false
 
-KeyCloaker.initKeyCloaker(false) //set false if no server exists
+KeyCloaker.initKeyCloaker(true) //set false if no server exists
 
 //console.log('MAIN.TS KEYCLOKER: ' + JSON.stringify(globalThis.keyCloaker))
 if (globalThis.keyCloaker == null)
@@ -37,11 +37,11 @@ else {
           .updateToken(70)
           .then((refreshed) => {
             //Vue.$log.error("Refreshed token");
-            console.log('Refreshed token')
+           // console.log('Refreshed token')
           })
           .catch(() => {
             //Vue.$log.error("Failed to refresh token");
-            console.log('Failed to refresh token')
+            //console.log('Failed to refresh token')
           })
       }, 6000)
     })

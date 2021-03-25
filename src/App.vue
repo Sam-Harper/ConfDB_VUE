@@ -7,7 +7,7 @@
           v-model="file"
           label="Select config file..."
         ></v-file-input>
-        <v-btn color="primary" @click="onOpen">Open Config</v-btn>
+        <v-btn color="primary" @click="onUpload">Open Config</v-btn>
         <!--HERE -->
         <FileUpload />
         <v-spacer></v-spacer>
@@ -65,7 +65,7 @@ import TableView from './components/TableView.vue'
 import SnippetView from './components/SnippetView.vue'
 import NotificationSnackBar from './components/NotificationSnackBar.vue'
 import FileUpload from './components/FileUpload.vue'
-
+import GlobalService from './services/GlobalService'
 import { Component, Vue } from 'vue-property-decorator'
 import { mapGetters } from 'vuex'
 
@@ -107,6 +107,10 @@ export default class App extends Vue {
 
       this.$store.dispatch('setOpenFileContent', this.fileContent)
     }
+  }
+  public onUpload() {
+    console.log("opening "+this.file)
+    GlobalService.uploadFile(this.file)
   }
 
   public switchDarkMode() {
